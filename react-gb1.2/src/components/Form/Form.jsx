@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { AUTHOR } from '../../constant'
-import { Button } from '../func/ui/Button'
+import { AUTHOR } from '../../constants'
+import { Button } from '../ui/Button'
 // import IButton from '@mui/material/Button';
 // import ITextField from '@mui/material/TextField';
 

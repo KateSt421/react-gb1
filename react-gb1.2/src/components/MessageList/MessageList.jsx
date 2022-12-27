@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
 
 export function MessageList({ messages }) {
-
+    console.log('messages', messages)
     return (
         <>
-            <h1 style={{ color: 'violet' }}>MessageList</h1>
+            <h1 style={{ color: 'blue' }}>MessageList</h1>
             <ul>
-                {messages.map((item, index) => (
-                    <li style={{ color: 'blue' }} key={index}>{item.text}</li>
+                {messages.map((message, index) => (
+                    <li key={index}>
+                        {message.author} : {message.text}
+                    </li>
                 ))}
             </ul>
         </>
