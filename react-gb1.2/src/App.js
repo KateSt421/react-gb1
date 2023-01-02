@@ -4,6 +4,10 @@ import { Form } from './components/Form/Form'
 import { MessageList } from './components/MessageList/MessageList'
 
 import { AUTHOR } from './constant'
+import { Articles } from './pages/Articles'
+//import Button from '@mui/material/Button';
+//import Button from '@material-ui/core/Button'
+
 
 
 
@@ -36,6 +40,10 @@ export function App() {
       <h1 style={{ color: 'pink' }} >Welcome to chat!</h1>
       <Form addMessage={addMessage} />
       <MessageList messages={messages} />
+
+      <Articles />
+
+
     </>
   )
 }
