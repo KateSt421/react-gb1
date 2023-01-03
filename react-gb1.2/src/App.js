@@ -1,41 +1,82 @@
-import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { nanoid } from 'nanoid'
 
-import { Form } from './components/Form/Form'
-import { MessageList } from './components/MessageList/MessageList'
+import { Header } from './components/Header/Header'
+import { MainPage } from './pages/MainPage'
+import { ProfilePage } from './pages/ProfilePage'
+import { ChatsPage } from './pages/ChatsPage/ChatsPage'
+import { ChatList } from './components/ChatList/ChatList'
+import { useState } from 'react'
+import { defaultContext, ThemeContext } from './utils/ThemeContext'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
-import { AUTHOR } from './constant'
-
-
+const degaultMessges = {
+  default: [
+    {
+      author: 'user',
+      text: 'one text'
+    },
+    {
+      author: 'user',
+      text: 'two text'
+    },
+  ]
+}
 
 export function App() {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(degaultMessges)
+  const [theme, setTheme] = useState(defaultContext.theme)
 
-  const addMessage = (newMessage) => {
-    console.log('newMessage', newMessage);
-    setMessages([...messages, newMessage])
+  // const chats = Object.keys(messages).map((chat) => ({
+  //   id: nanoid(),
+  //   name: chat
+  // }))
+
+  // const onAddChat = (newChat) => {
+  //   console.log('newChat', newChat)
+  //   setMessages({
+  //     ...messages,
+  //     [newChat.name]: []
+  //   })
+  // }
+
+  // const onAddMessage = (chatId, newMassage) => {
+  //   setMessages({
+  //     ...messages,
+  //     [chatId]: [...messages[chatId], newMassage]
+  //   })
+  // }
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
   }
-
-  useEffect(() => {
-    if (messages.length > 0 && messages[messages.length - 1].author === AUTHOR.user) {
-      const timeout = setTimeout(() => {
-        addMessage({
-          author: AUTHOR.bot,
-          text: 'Im BOT'
-        })
-      }, 1500)
-
-      return () => {
-        clearTimeout(timeout)
-      }
-    }
-  }, [messages])
-
 
   return (
     <>
-      <h1 style={{ color: 'pink' }} >Welcome to chat!</h1>
-      <Form addMessage={addMessage} />
-      <MessageList messages={messages} />
+      {/* <Header /> */}
+      <Provider store={store}>
+        <ThemeContext.Provider value={{
+          theme,
+          toggleTheme
+        }}>
+          <Routes>
+            <Route path='/' element={<Header />}>
+              <Route index element={<MainPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="chats">
+                <Route index element={<ChatList />} />
+                <Route
+                  path=":chatId"
+                  element={<ChatsPage />}
+                />
+              </Route>
+            </Route>
+
+            <Route path="*" element={<h2>404 Page not FOUND</h2>} />
+          </Routes>
+        </ThemeContext.Provider>
+      </Provider>
     </>
   )
 }

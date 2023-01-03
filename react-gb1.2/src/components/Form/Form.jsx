@@ -1,38 +1,44 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { AUTHOR } from '../../constant'
-import { Button } from '../func/ui/Button'
+import { AUTHOR } from '../../constants'
+import { Button } from '../ui/Button'
+import { useDispatch } from 'react-redux'
+import { addMessage } from '../../store/messages/actions'
+import { useParams } from 'react-router-dom'
 // import IButton from '@mui/material/Button';
 // import ITextField from '@mui/material/TextField';
 
 // import styles from './Form.module.css'
 
-
-export function Form({ addMessage }) {
+export function Form() {
     const [text, setText] = useState('')
+    const dispatch = useDispatch()
+    const { chatId } = useParams()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         //todo...
-        addMessage({
-            author: AUTHOR.user,
-            text
-        })
+        // addMessage({
+        //   author: AUTHOR.user,
+        //   text
+        // })
+        dispatch(addMessage(chatId, text))
 
         setText('')
     }
 
-    console.log('input', text)
+    // console.log('input', text)
 
     return (
         <>
-            <h1 style={{ color: 'blue' }}>Form</h1>
+            <h1>Form</h1>
             <form onSubmit={handleSubmit}>
                 <input style={{ color: 'red', padding: '15px', margin: '15px', width: '150px' }}
                     type="text"
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                 />
+                {/* <Button type="submit" render={() => <span>BUTTON</span>}>Add message</Button> */}
                 <Button style={{ color: 'red', padding: '15px', margin: '15px', width: '150px', backgroundColor: 'aqua' }} type="submit">Add message</Button>
                 {/* <ITextField 
           id="standard-basic"
