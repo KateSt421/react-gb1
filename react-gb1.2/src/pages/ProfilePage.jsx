@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { ThemeContext } from '../utils/ThemeContext'
 import { useSelector, useDispatch } from 'react-redux'
-import * as types from '../store/profile/types'
 import { changeName, toggleProfile } from '../store/profile/actions'
 import { selectName, selectVisible } from '../store/profile/selectors'
 
@@ -13,15 +12,13 @@ export function ProfilePage() {
 
     const dispatch = useDispatch()
 
-    // console.log('theme ====>', theme)
-    // console.log('store', name)
-
+    /*
     const hendleChange = () => {
-        console.log(value)
-        // dispatch({type: types.CHANGE_NAME, payload: value})
-        dispatch(changeName(value))
-        setValue('')
+      console.log(value)
+      dispatch(changeName(value))
+      setValue('')
     }
+    */
 
     return (
         <>
@@ -31,7 +28,7 @@ export function ProfilePage() {
             <hr />
             <h2>{name}</h2>
             <input style={{ color: 'red', padding: '15px', margin: '15px', width: '150px' }} type="checkbox" checked={visible} readOnly />
-            <button style={{ color: 'red', padding: '15px', margin: '15px', width: '150px', backgroundColor: 'aqua' }} onClick={() => dispatch(toggleProfile())} >change visible</button>
+            <button style={{ color: 'red', padding: '15px', margin: '15px', width: '150px', backgroundColor: 'aqua' }} onClick={() => dispatch(toggleProfile())} >Change visible</button>
             <br />
             <input style={{ color: 'red', padding: '15px', margin: '15px', width: '150px' }}
                 type="text"
