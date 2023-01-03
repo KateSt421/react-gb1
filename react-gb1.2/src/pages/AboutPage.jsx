@@ -17,7 +17,7 @@ function AboutPage(props) {
             <input style={{ color: 'red', padding: '15px', margin: '15px', width: '150px' }} type="checkbox" checked={props.visible} readOnly />
             <button style={{ color: 'red', padding: '15px', margin: '15px', width: '150px', backgroundColor: 'aqua' }} onClick={() => props.toggle()} >Change visible</button>
             <br />
-            <input
+            <input style={{ color: 'red', padding: '15px', margin: '15px', width: '150px' }}
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
