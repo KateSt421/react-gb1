@@ -31,7 +31,7 @@ export function ChatList() {
                         <Link to={`/chats/${chat.name}`}>
                             {chat.name}
                         </Link>
-                        <button onClick={() => dispatch(deleteChat(chat.name))}>X</button>
+                        <button style={{ color: 'red', padding: '15px', margin: '15px', width: '150px', backgroundColor: 'aqua' }} onClick={() => dispatch(deleteChat(chat.name))}>X</button>
                     </li>
                 ))}
             </ul>
